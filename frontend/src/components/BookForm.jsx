@@ -83,7 +83,7 @@ export default function BookForm({ bookData }) {
   }, [bookData]);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{paddingTop:"30px", paddingBottom:"50px"}}>
       <VStack spacing={4}>
         <FormControl>
           <FormLabel>Title</FormLabel>
@@ -133,7 +133,10 @@ export default function BookForm({ bookData }) {
           </FormControl>
         )}
 
-        <Button type="submit">{bookData ? "Edit Book" : "Create Book"}</Button>
+        <Button type="submit" colorScheme="blue"
+            onClick={() => {
+              navigate("/")
+            }}>{bookData ? "Edit Book" : "Create Book"}</Button>
       </VStack>
     </form>
   );

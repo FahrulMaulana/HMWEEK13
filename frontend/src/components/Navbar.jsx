@@ -42,21 +42,26 @@ const Navbar = () => {
       justify="space-between"
       wrap="wrap"
       padding="1rem"
-      bg="teal.500"
+      bg="grey"
       color="white"
     >
       <Link to="/">
         <Flex align="center" mr={5} cursor="pointer">
           <Text fontSize="xl" fontWeight="bold">
-            My Website
+            My Library
           </Text>
         </Flex>
       </Link>
       <HStack>
         {isLogin && (
+          <HStack>
+            <Link to="/">
+          <Button colorScheme="blackAlpha">Dashboard</Button>
+        </Link>,
           <Link to="/newbook">
             <Button colorScheme="blackAlpha">Create New Book</Button>
           </Link>
+        </HStack>
         )}
         {!isLogin ? (
           <Button onClick={onOpen} colorScheme="blue">
@@ -125,7 +130,7 @@ const Navbar = () => {
               </VStack>
             </ModalBody>
             <ModalFooter>
-              <Button type="submit" form="login-form" colorScheme="blue" mr={3}>
+              <Button type="submit" form="login-form" colorScheme="red" mr={3}>
                 Login
               </Button>
               <Link to="/register" onClick={onClose}>

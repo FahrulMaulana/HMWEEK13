@@ -7,6 +7,8 @@ const bcrypt = require("bcrypt");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const app = express();
+require('dotenv').config();
+
 
 
 function authenticateTokenMiddleware(req, res, next) {
@@ -70,11 +72,11 @@ app.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "User not found" });
     }
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(400).json({ message: "Wrong password" });
     }
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
     res.json({ token });
